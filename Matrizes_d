@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+#define LINHAS 3
+#define COLUNAS 3
+
+void preencherMatriz(int matriz[LINHAS][COLUNAS]) {
+    printf("Preenchendo a matriz:\n");
+    for (int i = 0; i < LINHAS; i++) {
+        for (int j = 0; j < COLUNAS; j++) {
+            printf("Digite o valor para a posição [%d][%d]: ", i + 1, j + 1);
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+}
+
+void visualizarMatriz(int matriz[LINHAS][COLUNAS]) {
+    printf("\nMatriz atual:\n");
+    for (int i = 0; i < LINHAS; i++) {
+        for (int j = 0; j < COLUNAS; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matriz[LINHAS][COLUNAS] = {0}; // Inicializa a matriz com zeros
+    int opcao;
+
+    do {
+        printf("\nMenu de opções:\n");
+        printf("1. Preencher e visualizar a matriz\n");
+        printf("2. Visualizar a matriz\n");
+        printf("3. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                preencherMatriz(matriz);
+                visualizarMatriz(matriz);
+                break;
+            case 2:
+                visualizarMatriz(matriz);
+                break;
+            case 3:
+                printf("Saindo do programa...\n");
+                break;
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+        }
+    } while (opcao != 3);
+
+    return 0;
+}
