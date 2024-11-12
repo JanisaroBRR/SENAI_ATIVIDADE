@@ -1,0 +1,124 @@
+#include <stdio.h>
+
+#define MAX 100  // Tamanho máximo do vetor
+
+void adicionarElemento(int vetor[], int *tamanho);
+void exibirVetor(int vetor[], int tamanho);
+void buscarElemento(int vetor[], int tamanho);
+void removerElemento(int vetor[], int *tamanho);
+void limparVetor(int vetor[], int *tamanho);
+
+int main() {
+    int vetor[MAX];
+    int tamanho = 0;
+    int opcao;
+
+    do {
+        printf("\n=== MENU ===\n");
+        printf("1. Adicionar Elemento\n");
+        printf("2. Exibir Vetor\n");
+        printf("3. Buscar Elemento\n");
+        printf("4. Remover Elemento\n");
+        printf("5. Limpar Vetor\n");
+        printf("6. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch(opcao) {
+            case 1:
+                adicionarElemento(vetor, &tamanho);
+                break;
+            case 2:
+                exibirVetor(vetor, tamanho);
+                break;
+            case 3:
+                buscarElemento(vetor, tamanho);
+                break;
+            case 4:
+                removerElemento(vetor, &tamanho);
+                break;
+            case 5:
+                limparVetor(vetor, &tamanho);
+                break;
+            case 6:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opcao invalida! Tente novamente.\n");
+        }
+    } while(opcao != 6);
+
+    return 0;
+}
+
+void adicionarElemento(int vetor[], int *tamanho) {
+    if (*tamanho >= MAX) {
+        printf("Erro: vetor cheio!\n");
+        return;
+    }
+    printf("Digite o elemento a ser adicionado: ");
+    scanf("%d", &vetor[*tamanho]);
+    (*tamanho)++;
+    printf("Elemento adicionado com sucesso!\n");
+}
+
+void exibirVetor(int vetor[], int tamanho) {
+    if (tamanho == 0) {
+        printf("O vetor esta vazio.\n");
+        return;
+    }
+    printf("Elementos do vetor: ");
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+}
+
+void buscarElemento(int vetor[], int tamanho) {
+    if (tamanho == 0) {
+        printf("O vetor esta vazio.\n");
+        return;
+    }
+    int elemento, encontrado = 0;
+    printf("Digite o elemento a ser buscado: ");
+    scanf("%d", &elemento);
+    for (int i = 0; i < tamanho; i++) {
+        if (vetor[i] == elemento) {
+            printf("Elemento encontrado na posicao %d.\n", i);
+            encontrado = 1;
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Elemento nao encontrado.\n");
+    }
+}
+
+void removerElemento(int vetor[], int *tamanho) {
+    if (*tamanho == 0) {
+        printf("O vetor esta vazio.\n");
+        return;
+    }
+    int elemento, encontrado = 0;
+    printf("Digite o elemento a ser removido: ");
+    scanf("%d", &elemento);
+    for (int i = 0; i < *tamanho; i++) {
+        if (vetor[i] == elemento) {
+            for (int j = i; j < *tamanho - 1; j++) {
+                vetor[j] = vetor[j + 1];
+            }
+            (*tamanho)--;
+            printf("Elemento removido com sucesso.\n");
+            encontrado = 1;
+            break;
+        }
+    }
+    if (!encontrado) {
+        printf("Elemento nao encontrado.\n");
+    }
+}
+
+void limparVetor(int vetor[], int *tamanho) {
+    *tamanho = 0;
+    printf("Vetor limpo com sucesso!\n");
+}
